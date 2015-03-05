@@ -118,11 +118,6 @@ CREATE TABLE `cb_user_feedback` (
 -- Dumping data for table `cb_user_feedback`
 --
 
-LOCK TABLES `cb_user_feedback` WRITE;
-/*!40000 ALTER TABLE `cb_user_feedback` DISABLE KEYS */;
-INSERT INTO `cb_user_feedback` VALUES (27,'Emely','emy@hotmail.com','this is great stuff','2014-09-02 23:04:54'),(28,'Jose Benavides','dark@hotmail.com','muy de la puta mare ','2014-09-02 23:06:16'),(29,'Alonso','alonso@hotmail.com','muy app bro!','2014-09-03 00:19:26'),(30,'Angela','angela@bla.com','Hola, cómo estas?','2014-09-03 00:21:02'),(31,'Alejandra Talavera','alejandrita@hotmail.com','Hola, cómo estas? pienso que esta app es lo máximo, indeed!','2014-09-03 00:59:04'),(32,'Juan','pepper@michell.com.pe','Muy buena app, te felicito!','2014-09-03 01:36:22'),(33,'Andre','andreagc@peru.com','Muy buen app, cómo hago para invertir?','2014-09-03 01:38:01'),(34,'Alana Breen','breen@hotmail.com','wonderful app indeed!','2014-09-03 06:04:07'),(35,'Ariana Pepper','ariana@tenis.com','Hola me gusta mucho la app!','2014-09-04 01:37:20'),(36,'Ariana Pepper','ariana@tenis.com','Hola me gusta mucho la app!','2014-09-04 01:38:10'),(37,'Ariana Pepper','ariana@tenis.com','Hola me gusta mucho la app!','2014-09-04 01:39:25'),(38,'Parisa Beeck','','Hi this app is so cool! :)','2014-09-04 01:44:17'),(39,'Robert','','BLALALALA','2014-10-15 05:06:56'),(40,'Paquita Talavera','paquita@gmail.com','hola, me gusto mucho tu app','2014-11-18 19:10:18');
-/*!40000 ALTER TABLE `cb_user_feedback` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `logtable`
@@ -422,8 +417,8 @@ proc:BEGIN
 					AND user_statement_of_account > user_lower_limit_profit;
 
 	SET num_lenders = (SELECT COUNT(*) FROM user_information 
-							WHERE user_is_borrower = 0 AND user_active = 1
-								AND user_statement_of_account > user_lower_limit_profit);
+					WHERE user_is_borrower = 0 AND user_active = 1
+						AND user_statement_of_account > user_lower_limit_profit);
 
 	IF num_lenders = 0 THEN
         LEAVE proc;
@@ -565,9 +560,9 @@ BEGIN
 					ORDER BY user_weight ASC;
 
 	SET num_lenders = (SELECT COUNT(*)
-						FROM user_information 
-							WHERE user_is_borrower = 0 AND user_active = 1
-								ORDER BY user_weight ASC);
+				FROM user_information 
+					WHERE user_is_borrower = 0 AND user_active = 1
+						ORDER BY user_weight ASC);
 
 	CREATE TEMPORARY TABLE pivots_array(
 		pos INT NOT NULL DEFAULT 0,
@@ -592,8 +587,8 @@ BEGIN
 			SET prorate = w + y;
 			UPDATE user_information SET user_prorate_pivot = prorate WHERE user_id = id;
 			SET new_units_to_borrow = (SELECT user_statement_of_account
-											FROM user_information
-												WHERE user_is_borrower = 0 AND user_active = 1 AND user_id = id) - prorate; 
+						FROM user_information
+						 WHERE user_is_borrower = 0 AND user_active = 1 AND user_id = id) - prorate; 
 			UPDATE user_information SET user_units_ready_to_borrow = new_units_to_borrow WHERE user_id = id;
 			SET acum = prorate + acum;
 			SET z = units_input - acum;

@@ -1,7 +1,7 @@
 # crowbe
 CROWBE: An Approach to a Crowd Banking System
 
-Source code of the MySQL database with procedures
+Source code of the MySQL database with the procedures.
 Date: january-02-15
 This is not v1 of the project, is the database where the project's concept like proration has been tested.
 

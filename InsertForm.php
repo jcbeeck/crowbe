@@ -9,13 +9,12 @@ use yii\db\Connection;
 class InsertForm extends Model
 {
     public $name;
-	  public $insert_units;
+    public $insert_units;
     public $verifyCode;
 	
-	  public $flag_message;
-	
-	  public $id_user;
-	  public $cb_id;
+    public $flag_message;
+    public $id_user;
+    public $cb_id;
 	
     /**
      * @return array the validation rules.
@@ -27,8 +26,8 @@ class InsertForm extends Model
             [['name'], 'required'],
             // email has to be a valid email address
             //['email'],
-			 //[['lender'], 'boolean'],
-			[['insert_units'], 'integer', 'min'=>0.01],
+	    //[['lender'], 'boolean'],
+	    [['insert_units'], 'integer', 'min'=>0.01],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
         ];

@@ -102,11 +102,11 @@ class LenderForm extends Model
 		
 		//update units information in cb_information table for borrow
 		$command = $connection->createCommand('SELECT cb_units_for_borrow FROM cb_information 
-													ORDER BY cb_id DESC limit 1');
+							ORDER BY cb_id DESC limit 1');
 		$units_for_borrow = $command->queryScalar();
 		$command->execute();
 		$command = $connection->createCommand('SELECT cb_id FROM cb_information 
-													ORDER BY cb_id DESC limit 1');
+							ORDER BY cb_id DESC limit 1');
 		$cb_id_borrow = $command->queryScalar();
 		$command->execute();
 		

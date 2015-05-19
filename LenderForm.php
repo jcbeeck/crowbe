@@ -10,18 +10,18 @@ class LenderForm extends Model
 {
   public $name;
   public $lender_units;
-	public $lender_limit_profits;
+  public $lender_limit_profits;
   public $verifyCode;
 	
-	public $prorates;
+  public $prorates;
 	
-	public $id_user;
-	public $lower;
-	public $weight;
-	public $units_ready;
-	public $available_units;
-	public $units_for_borrow;
-	public $cb_id_borrow;
+  public $id_user;
+  public $lower;
+  public $weight;
+  public $units_ready;
+  public $available_units;
+  public $units_for_borrow;
+  public $cb_id_borrow;
 
 
     /**

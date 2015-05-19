@@ -8,25 +8,25 @@ use yii\db\Connection;
 
 class BorrowerForm extends Model
 {
-  public $name;
-	public $borrower_units;
-	public $lender_limit_profits;
-  public $verifyCode;
+   public $name;
+   public $borrower_units;
+   public $lender_limit_profits;
+   public $verifyCode;
 	
-	public $prorates;
+   public $prorates;
 	
-	public $id_user;
-	public $lower;
-	public $weight;
-	public $units_ready;
-	public $available_units;
-	public $flag_message;
-	public $can_borrow;
-	public $safety_units;
-	public $can_borrow_now;
-	public $can_borrow_init;
+   public $id_user;
+   public $lower;
+   public $weight;
+   public $units_ready;
+   public $available_units; 
+   public $flag_message;
+   public $can_borrow;
+   public $safety_units;
+   public $can_borrow_now;
+   public $can_borrow_init;
 	
-	public $cb_id;
+   public $cb_id;
 
     /**
      * @return array the validation rules.
@@ -38,8 +38,8 @@ class BorrowerForm extends Model
             [['name'], 'required'],
             // email has to be a valid email address
             //['email'],
-			 //[['lender'], 'boolean'],
-			[['borrower_units'], 'integer', 'min'=>0.01],
+	    //[['lender'], 'boolean'],
+	    [['borrower_units'], 'integer', 'min'=>0.01],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
         ];
@@ -82,11 +82,11 @@ class BorrowerForm extends Model
 		$command->execute();
 		
 		//$command = $connection->createCommand('SELECT cb_units_for_borrow FROM cb_information 
-													//ORDER BY cb_id  DESC');
+							  //ORDER BY cb_id  DESC');
 													
 		$command = $connection->createCommand('SELECT SUM(user_available_units) 
-													FROM user_information 
-														WHERE user_is_borrower = 0 AND user_active = 1');
+							FROM user_information 
+							   WHERE user_is_borrower = 0 AND user_active = 1');
 		$can_borrow_now = $command->queryScalar();
 		$command->execute();
 		
@@ -94,7 +94,9 @@ class BorrowerForm extends Model
 		$cb->cb_units_for_borrow = $can_borrow_now;
 		$cb->save();
 		
-		$command = $connection->createCommand('SELECT cb_units_for_borrow FROM cb_information ORDER BY cb_id DESC limit 1');
+		$command = $connection->createCommand('SELECT cb_units_for_borrow 
+							FROM cb_information 
+								ORDER BY cb_id DESC limit 1');
 		$can_borrow = $command->queryScalar();
 		$command->execute();
 		
@@ -122,7 +124,8 @@ class BorrowerForm extends Model
 			$this->flag_message = 'Success';
 			
 			//CB information
-			$command = $connection->createCommand('SELECT cb_id FROM cb_information ORDER BY cb_id DESC limit 1');
+			$command = $connection->createCommand('SELECT cb_id FROM cb_information 
+									ORDER BY cb_id DESC limit 1');
 			$cb_id = $command->queryScalar();
 			$command->execute();
 			$command = $connection->createCommand('call SetCBProrates(:_cbid)');

@@ -34,8 +34,8 @@ class LenderForm extends Model
             [['name'], 'required'],
             // email has to be a valid email address
             //['email'],
-			 //[['lender'], 'boolean'],
-			[['lender_units'], 'integer', 'min'=>0.01],
+	   //[['lender'], 'boolean'],
+	    [['lender_units'], 'integer', 'min'=>0.01],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
         ];
@@ -69,20 +69,26 @@ class LenderForm extends Model
 		
 		$connection = \Yii::$app->db;
 		//Find the last record of the table
-		$command = $connection->createCommand('SELECT user_id FROM user_information ORDER BY user_id desc limit 1');
+		$command = $connection->createCommand('SELECT user_id 
+							  FROM user_information 
+								ORDER BY user_id desc limit 1');
 		$id_user = $command->queryScalar();
 		//2.
 		$command = $connection->createCommand('call CalculateLowerLimit(:_id)');
 		$command->bindParam(':_id',$id_user);
 		$command->execute();
-		$command = $connection->createCommand('SELECT user_lower_limit_profit FROM user_information WHERE user_id =:_id');
+		$command = $connection->createCommand('SELECT user_lower_limit_profit 
+								FROM user_information
+									WHERE user_id =:_id');
 		$command->bindParam(':_id',$id_user);
 		$this->lower = $command->queryScalar();
 		$command->execute();
 		
 		$command = $connection->createCommand('call CalculateWeight()');
 		$command->execute();
-		$command = $connection->createCommand('SELECT user_weight FROM user_information WHERE user_id =:_id');
+		$command = $connection->createCommand('SELECT user_weight 
+		                                         FROM user_information 
+		                                             WHERE user_id =:_id');
 		$command->bindParam(':_id',$id_user);
 		$this->weight = $command->queryScalar();
 		$command->execute();
@@ -90,7 +96,9 @@ class LenderForm extends Model
 		$command = $connection->createCommand('call UnitsAvailableToBorrow(:_id)');
 		$command->bindParam(':_id',$id_user);		
 		$command->execute();
-		$command = $connection->createCommand('SELECT user_available_units FROM user_information WHERE user_id =:_id');
+		$command = $connection->createCommand('SELECT user_available_units
+							FROM user_information 
+								WHERE user_id =:_id');
 		$command->bindParam(':_id',$id_user);
 		$this->available_units = $command->queryScalar();
 		$command->execute();
@@ -101,12 +109,14 @@ class LenderForm extends Model
 		//$command->execute();
 		
 		//update units information in cb_information table for borrow
-		$command = $connection->createCommand('SELECT cb_units_for_borrow FROM cb_information 
-							ORDER BY cb_id DESC limit 1');
+		$command = $connection->createCommand('SELECT cb_units_for_borrow 
+							  FROM cb_information 
+								ORDER BY cb_id DESC limit 1');
 		$units_for_borrow = $command->queryScalar();
 		$command->execute();
-		$command = $connection->createCommand('SELECT cb_id FROM cb_information 
-							ORDER BY cb_id DESC limit 1');
+		$command = $connection->createCommand('SELECT cb_id 
+						          FROM cb_information 
+								ORDER BY cb_id DESC limit 1');
 		$cb_id_borrow = $command->queryScalar();
 		$command->execute();
 		

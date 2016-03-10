@@ -1,5 +1,5 @@
 # crowbe
-CROWBE: An Approach to a Crowd Banking System (open source project: halted)
+CROWBE: An Approach to a Crowd Banking System (open source project: halted for now)
 
 Source code of the MySQL database with the procedures.
 

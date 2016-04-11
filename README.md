@@ -1,5 +1,5 @@
 # crowbe
-CROWBE: An Approach to a Crowd Banking System (open source project: halted for now)
+CROWBE: An Approach to a Crowd Banking System 
 
 White paper: www.crowbe.com/crowbe.pdf
 

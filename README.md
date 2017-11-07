@@ -1,8 +1,6 @@
 # crowbe
 CROWBE: An Approach to a Crowd Banking System 
 
-White paper: www.crowbe.com/crowbe.pdf
-
 Source code of the MySQL database with the procedures.
 
 Date: January-02-15 (mysqldump of the last version).
